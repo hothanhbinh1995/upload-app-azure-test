@@ -2,7 +2,7 @@ const request = require('request')
 const fs = require('fs')
 const user_name =  process.env.USER_NAME
 const apikey = process.env.API_KEY
-const file_name = 'KMSDirectory.apk'
+const file_name = process.env.APP_NAME
 const app_path = `${process.env.APP_PATH}/${file_name}`
 const app_id = process.env.app_id
 const stats = fs.statSync(app_path)
@@ -27,7 +27,7 @@ async function main() {
 
     const getUrl = await new Promise((resolve, reject) => {
       request({
-        url: 'https://api-test.kobiton.com/v1/apps/uploadUrl',
+        url: 'https://api.kobiton.com/v1/apps/uploadUrl',
         json: true,
         method: 'POST',
         body: inputBody,
@@ -72,7 +72,7 @@ async function main() {
 console.log('Step 3: Create Application Or Version')
   const createAppVersion = await new Promise((resolve, reject) => {
     request({
-      url: 'https://api-test.kobiton.com/v1/apps',
+      url: 'https://api.kobiton.com/v1/apps',
       json: true,
       method: 'POST',
       body: {
